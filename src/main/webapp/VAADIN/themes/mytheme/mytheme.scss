@@ -67,7 +67,75 @@ $v-layout-spacing-horizontal: round($v-unit-size / 1.8) !default;
 @mixin mytheme {
   @include valo;
 
+  //sign up starts
+  .signup-screen {
+  
+  
+  .v-button-friendly {
+  margin-right:18px;
+  }
+    background: $editor-background-color;
 
+    @if $login-background-image {
+      background-image: url(#{$login-background-image});
+      background-size: cover;
+      background-position: 50% 50%;
+    }
+    
+    .signup-style{
+margin-left: 16px;
+}
+
+    width: 100%;
+    height: 100%;
+
+    .login-form {
+      @include valo-panel-style;
+      border: none;
+      padding: $v-layout-margin;
+      @include valo-animate-in-fade($duration: 1s);
+    }
+
+    .signup-information {
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: $login-info-width;
+      height: 100%;
+      background: $v-selection-color; // For IE8
+      background-color: rgba($v-selection-color, $login-info-opacity);
+      padding: $v-layout-margin;
+      color: valo-font-color($v-selection-color, 0.9);
+      @include animation(valo-animate-in-fade 1s 1s backwards);
+
+      h1 {
+        color: inherit;
+      }
+    }
+
+    .centering-layout {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      padding-left: $login-info-width;
+
+      .v-slot {
+        height: 100%;
+      }
+    }
+  }
+
+  // makes the CRUD view keep the sidebar editor within the view as sidebar is absolutely positioned
+  .crud-view {
+  	position: relative;
+
+    .filter-textfield {
+      width: round($v-unit-size * 9);
+    }
+  }
+  
+  ///////////////signup ends
 
   // login screen - for small screens, see below
   .login-screen {

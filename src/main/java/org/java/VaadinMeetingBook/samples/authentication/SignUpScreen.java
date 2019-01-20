@@ -2,8 +2,11 @@ package org.java.VaadinMeetingBook.samples.authentication;
 
 import java.io.Serializable;
 
+import org.java.VaadinMeetingBook.MyUI;
+
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.Page;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -24,20 +27,27 @@ public class SignUpScreen extends CssLayout {
 
     private TextField username;
     private PasswordField password;
-    private Button login;
-    private Button forgotPassword;
-    private LoginListener loginListener;
+Button login = new Button ("create a account");
+    Button cancelsignup = new Button ("cancel");
+  
     private AccessControl accessControl;
+//
+//    public SignUpScreen(AccessControl accessControl, LoginListener loginListener) {
+//        this.loginListener = loginListener;
+//        this.accessControl = accessControl;
+//        buildUI();
+//        username.focus();
+//    }
 
-    public SignUpScreen(AccessControl accessControl, LoginListener loginListener) {
-        this.loginListener = loginListener;
-        this.accessControl = accessControl;
-        buildUI();
-        username.focus();
-    }
+    public SignUpScreen(MyUI myUI) {
+    	
+    	 buildUI();
+		// TODO Auto-generated constructor stub
+	}
 
-    private void buildUI() {
-        addStyleName("login-screen");
+	private void buildUI() {
+        addStyleName("signup-screen");
+        addStyleName("signup-information");
 
         // login form, centered in the available part of the screen
         Component loginForm = buildLoginForm();
@@ -76,29 +86,35 @@ public class SignUpScreen extends CssLayout {
         buttons.setStyleName("buttons");
         loginForm.addComponent(buttons);
 
-        buttons.addComponent(login = new Button("Login"));
+        buttons.addComponent(login);
         login.setDisableOnClick(true);
         login.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
-                try {
-                    login();
-                } finally {
-                    login.setEnabled(true);
-                }
+//                try {
+//                    login();
+//                } finally {
+//                    login.setEnabled(true);
+//                }
             }
         });
         login.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         login.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 
-        buttons.addComponent(forgotPassword = new Button("Forgot password?"));
-        forgotPassword.addClickListener(new Button.ClickListener() {
+        buttons.addComponent(cancelsignup);
+        
+        
+        cancelsignup.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
-                showNotification(new Notification("Hint: Try anything"));
+             VaadinSession.getCurrent().getSession().invalidate();
+             
+             Page.getCurrent().reload();
             }
         });
-        forgotPassword.addStyleName(ValoTheme.BUTTON_LINK);
+        
+        
+        cancelsignup.addStyleName(ValoTheme.BUTTON_PRIMARY);
         return loginForm;
     }
 
@@ -114,25 +130,8 @@ public class SignUpScreen extends CssLayout {
         return loginInformation;
     }
 
-    private void login() {
-        if (accessControl.signIn(username.getValue(), password.getValue())) {
-            loginListener.loginSuccessful();
-        } else {
-            showNotification(new Notification("Login failed",
-                    "Please check your username and password and try again.",
-                    Notification.Type.HUMANIZED_MESSAGE));
-            username.focus();
-        }
-    }
+ 
 
-    private void showNotification(Notification notification) {
-        // keep the notification visible a little while after moving the
-        // mouse, or until clicked
-        notification.setDelayMsec(2000);
-        notification.show(Page.getCurrent());
-    }
 
-    public interface LoginListener extends Serializable {
-        void loginSuccessful();
-    }
+  
 }

@@ -1,5 +1,7 @@
 package org.java.VaadinMeetingBook;
 
+import java.io.Serializable;
+
 import javax.servlet.annotation.WebServlet;
 
 import org.java.VaadinMeetingBook.samples.MainScreen;
@@ -7,6 +9,12 @@ import org.java.VaadinMeetingBook.samples.authentication.AccessControl;
 import org.java.VaadinMeetingBook.samples.authentication.BasicAccessControl;
 import org.java.VaadinMeetingBook.samples.authentication.LoginScreen;
 import org.java.VaadinMeetingBook.samples.authentication.LoginScreen.LoginListener;
+import org.java.VaadinMeetingBook.samples.authentication.LoginScreen.Loginup;
+import org.java.VaadinMeetingBook.samples.authentication.SignUpScreen;
+
+
+
+
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -33,29 +41,54 @@ public class MyUI extends UI {
 
     private AccessControl accessControl = new BasicAccessControl();
 
-    @Override
+    @SuppressWarnings("serial")
+	@Override
     protected void init(VaadinRequest vaadinRequest) {
         Responsive.makeResponsive(this);
         setLocale(vaadinRequest.getLocale());
         getPage().setTitle("My");
+        
+        
+     	 Loginup signup = new Loginup(){
+		@Override
+		public void singupsucessfullu() {
+			showSignupView();
+			
+		}
+     	 };
+       
         if (!accessControl.isUserSignedIn()) {
-            setContent(new LoginScreen(accessControl, new LoginListener() {
-                @Override
+        	
+  
+         
+			setContent(new LoginScreen(accessControl, new LoginListener()
+				{
+				@Override
                 public void loginSuccessful() {
                     showMainView();
                 }
-            }));
+
+            },signup));
         } else {
             showMainView();
         }
     }
 
-    protected void showMainView() {
+
+	protected void showMainView() {
         addStyleName(ValoTheme.UI_WITH_MENU);
         setContent(new MainScreen(MyUI.this));
         getNavigator().navigateTo(getNavigator().getState());
     }
-
+    
+    
+    protected void showSignupView() {
+        addStyleName(ValoTheme.UI_WITH_MENU);
+        setContent(new SignUpScreen(MyUI.this));
+        getNavigator().navigateTo(getNavigator().getState());
+    }
+    
+    
     public static MyUI get() {
         return (MyUI) UI.getCurrent();
     }

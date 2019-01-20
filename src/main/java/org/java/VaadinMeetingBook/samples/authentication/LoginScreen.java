@@ -2,6 +2,8 @@ package org.java.VaadinMeetingBook.samples.authentication;
 
 import java.io.Serializable;
 
+
+
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.Page;
 import com.vaadin.shared.ui.ContentMode;
@@ -28,13 +30,14 @@ public class LoginScreen extends CssLayout {
     private Button signup;
     private Button forgotPassword;
     private LoginListener loginListener;
-  //  private Loginup loginup;
+  private Loginup loginup;
     private AccessControl accessControl;
 
-    public LoginScreen(AccessControl accessControl, LoginListener loginListener) {
+    public LoginScreen(AccessControl accessControl, LoginListener loginListener
+    		,Loginup loginup) {
         this.loginListener = loginListener;
         this.accessControl = accessControl;
-        //this.loginup=sign;
+        this.loginup=loginup;
         buildUI();
         username.focus();
     }
@@ -92,6 +95,21 @@ public class LoginScreen extends CssLayout {
                 }
             }
         });
+        
+        
+        signup.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+            	
+            	loginup.singupsucessfullu();
+            }
+//                try {
+//                    login();
+//                } finally {
+//                    login.setEnabled(true);
+//                }
+//            }
+        });
         login.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         login.addStyleName(ValoTheme.BUTTON_FRIENDLY);
         signup.setClickShortcut(ShortcutAction.KeyCode.ENTER);
@@ -142,5 +160,12 @@ public class LoginScreen extends CssLayout {
 
     public interface LoginListener extends Serializable {
         void loginSuccessful();
+    }
+    
+    
+    public interface Loginup extends Serializable {
+        void singupsucessfullu();
+
+		
     }
 }
