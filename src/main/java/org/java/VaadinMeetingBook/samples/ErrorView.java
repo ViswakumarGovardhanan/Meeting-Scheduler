@@ -1,5 +1,7 @@
 package org.java.VaadinMeetingBook.samples;
 
+
+
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Label;

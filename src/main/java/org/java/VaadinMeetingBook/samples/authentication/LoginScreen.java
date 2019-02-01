@@ -58,7 +58,8 @@ public class LoginScreen extends CssLayout {
         centeringLayout.addComponent(loginForm);
         centeringLayout.setComponentAlignment(loginForm,
                 Alignment.MIDDLE_CENTER);
-
+        
+  
         // information text about logging in
       //  CssLayout loginInformation = buildLoginInformation();
 
@@ -70,10 +71,12 @@ public class LoginScreen extends CssLayout {
         FormLayout loginForm = new FormLayout();
 
         loginForm.addStyleName("login-form");
+        
+        
         loginForm.setSizeUndefined();
         loginForm.setMargin(false);
 
-        loginForm.addComponent(username = new TextField("Username", "admin"));
+        loginForm.addComponent(username = new TextField("Username"));
         username.setWidth(15, Unit.EM);
         loginForm.addComponent(password = new PasswordField("Password"));
         password.setWidth(15, Unit.EM);
@@ -141,14 +144,14 @@ public class LoginScreen extends CssLayout {
     }
 
     private void login() {
-        if (accessControl.signIn(username.getValue(), password.getValue())) {
+       // if (accessControl.signIn(username.getValue(), password.getValue())) {
             loginListener.loginSuccessful();
-        } else {
-            showNotification(new Notification("Login failed",
-                    "Please check your username and password and try again.",
-                    Notification.Type.HUMANIZED_MESSAGE));
-            username.focus();
-        }
+//        } else {
+//            showNotification(new Notification("Login failed",
+//                    "Please check your username and password and try again.",
+//                    Notification.Type.HUMANIZED_MESSAGE));
+//            username.focus();
+//        }
     }
 
     private void showNotification(Notification notification) {

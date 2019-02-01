@@ -1,8 +1,12 @@
 package org.java.VaadinMeetingBook.samples;
 
 import org.java.VaadinMeetingBook.MyUI;
-import org.java.VaadinMeetingBook.samples.about.AboutView;
 
+
+
+import org.java.VaadinMeetingBook.samples.Menu;
+import org.java.VaadinMeetingBook.samples.BookMeeting.BookMeeting;
+import org.java.VaadinMeetingBook.samples.about.AboutView;
 
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.Navigator;
@@ -28,10 +32,10 @@ public class MainScreen extends HorizontalLayout {
         viewContainer.setSizeFull();
 
         final Navigator navigator = new Navigator(ui, viewContainer);
-        navigator.setErrorView(ErrorView.class);
+        navigator.setErrorView (ErrorView.class);
         menu = new Menu(navigator);
-//        menu.addView(new SampleCrudView(), SampleCrudView.VIEW_NAME,
-//                SampleCrudView.VIEW_NAME, VaadinIcons.EDIT);
+        menu.addView(new BookMeeting(), BookMeeting.view_name,
+        		BookMeeting.view_name, VaadinIcons.EDIT);
         menu.addView(new AboutView(), AboutView.VIEW_NAME, AboutView.VIEW_NAME,
                 VaadinIcons.INFO_CIRCLE);
 

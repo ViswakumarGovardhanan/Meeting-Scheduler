@@ -1,5 +1,6 @@
 package org.java.VaadinMeetingBook.samples;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 
 /**
- * Responsive navigation menu presenting a list of available views to the user.
+ * Responsive navigation menorg.java.VaadinMeetingBook.samplesu presenting a list of available views to the user.
  */
 public class Menu extends CssLayout {
 

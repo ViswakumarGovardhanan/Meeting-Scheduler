@@ -80,6 +80,13 @@
 				<scope>import</scope>
 			</dependency>
 			
+        <dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			  <version>3.4.3</version>
+		</dependency>
+			
+			
 			<!--  -->
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -112,7 +119,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
-            <scope>test</scope>
+          <scope>compile</scope>
         </dependency>
     </dependencies>
 
