@@ -6,6 +6,7 @@ import org.java.VaadinMeetingBook.MyUI;
 
 import org.java.VaadinMeetingBook.samples.Menu;
 import org.java.VaadinMeetingBook.samples.BookMeeting.BookMeeting;
+import org.java.VaadinMeetingBook.samples.BookMeeting.NewtonView;
 import org.java.VaadinMeetingBook.samples.about.AboutView;
 
 import com.vaadin.icons.VaadinIcons;
@@ -37,6 +38,11 @@ public class MainScreen extends HorizontalLayout {
         menu.addView(new BookMeeting(), BookMeeting.view_name,
         		BookMeeting.view_name, VaadinIcons.EDIT);
         menu.addView(new AboutView(), AboutView.VIEW_NAME, AboutView.VIEW_NAME,
+                VaadinIcons.INFO_CIRCLE);
+        
+        
+        
+        menu.addView(new NewtonView(), NewtonView.VIEW_NAME, NewtonView.VIEW_NAME,
                 VaadinIcons.INFO_CIRCLE);
 
         navigator.addViewChangeListener(viewChangeListener);

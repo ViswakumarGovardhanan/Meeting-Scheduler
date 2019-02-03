@@ -15075,6 +15075,99 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
+.mytheme .book-screen {
+	background: #3b3f42;
+	background-image: url(img/home_sec.jpg);
+	background-size: cover;
+	background-position: 50% 50%;
+	width: 100%;
+	height: 100%;
+}
+
+.mytheme .book-screen .v-filterselect-venuesecondstyle {
+	margin-left: 137px;
+}
+
+.mytheme .book-screen .v-datefield-datebook {
+	margin-left: 167px;
+}
+
+.mytheme .book-screen .v-filterselect-endtimestyle {
+	margin-left: 125px;
+}
+
+.mytheme .book-screen .v-filterselect-starttimestyle {
+	margin-left: 120px;
+}
+
+.mytheme .book-screen .v-filterselect-roomstyle {
+	margin-left: 137px;
+}
+
+.mytheme .book-screen .v-textfield-meetingpurposefield {
+	margin-left: 105px;
+	width: 226px;
+}
+
+.mytheme .book-screen .v-button-friendly {
+	margin-right: 18px;
+}
+
+.mytheme .book-screen .book-form {
+	background: white;
+	color: #474747;
+	border-radius: 4px;
+	border: 1px solid #d5d5d5;
+	-webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
+	border: none;
+	padding: 21px 21px 21px 21px;
+	-webkit-animation: valo-animate-in-fade 1s backwards;
+	-moz-animation: valo-animate-in-fade 1s backwards;
+	animation: valo-animate-in-fade 1s backwards;
+	margin-right: 279px;
+}
+
+.mytheme .book-screen .book-information {
+	margin-right: 279px;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: 100%;
+	background: #60a0ea;
+	background-color: rgba(96, 160, 234, 0.7);
+	padding: 21px 21px 21px 21px;
+	color: #f2f6fa;
+	-webkit-animation: valo-animate-in-fade 1s 1s backwards;
+	-moz-animation: valo-animate-in-fade 1s 1s backwards;
+	animation: valo-animate-in-fade 1s 1s backwards;
+}
+
+.mytheme .book-screen .book-information h1 {
+	color: inherit;
+}
+
+.mytheme .book-screen .centering-layout {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	padding-left: 300px;
+}
+
+.mytheme .book-screen .centering-layout .v-slot {
+	height: 100%;
+}
+
+.mytheme .crud-view {
+	position: relative;
+}
+
+.mytheme .crud-view .filter-textfield {
+	width: 288px;
+}
+
 .mytheme .signup-screen {
 	background: #3b3f42;
 	background-image: url(img/home_sec.jpg);
@@ -15092,7 +15185,7 @@ div.v-layout.v-horizontal.v-widget {
 	margin-left: 16px;
 }
 
-.mytheme .signup-screen .login-form {
+.mytheme .signup-screen .signup-form {
 	background: white;
 	color: #474747;
 	border-radius: 4px;
@@ -15104,9 +15197,11 @@ div.v-layout.v-horizontal.v-widget {
 	-webkit-animation: valo-animate-in-fade 1s backwards;
 	-moz-animation: valo-animate-in-fade 1s backwards;
 	animation: valo-animate-in-fade 1s backwards;
+	margin-right: 279px;
 }
 
 .mytheme .signup-screen .signup-information {
+	margin-right: 279px;
 	display: inline-block;
 	position: absolute;
 	top: 0;
@@ -15154,7 +15249,11 @@ div.v-layout.v-horizontal.v-widget {
 	height: 100%;
 }
 
-.mytheme .login-screen .signup-style {
+.mytheme .login-screen .v-button-friendly {
+	margin-right: 18px;
+}
+
+.mytheme .login-screen .login-style {
 	margin-left: 16px;
 }
 
@@ -15170,9 +15269,11 @@ div.v-layout.v-horizontal.v-widget {
 	-webkit-animation: valo-animate-in-fade 1s backwards;
 	-moz-animation: valo-animate-in-fade 1s backwards;
 	animation: valo-animate-in-fade 1s backwards;
+	margin-right: 279px;
 }
 
 .mytheme .login-screen .login-information {
+	margin-right: 279px;
 	display: inline-block;
 	position: absolute;
 	top: 0;
