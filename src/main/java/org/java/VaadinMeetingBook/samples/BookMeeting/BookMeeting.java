@@ -1,11 +1,26 @@
 package org.java.VaadinMeetingBook.samples.BookMeeting;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
 
 
+
+
+
+
+import org.java.VaadinMeetingBook.samples.authentication.CurrentUser;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -16,6 +31,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -155,16 +171,21 @@ public class BookMeeting extends CssLayout implements View{
 
 	
 		starttimebuttons.addComponent(userName);
-		starttimebuttons.addComponent(seperatorone);
+		starttimebuttons.addComponent(seperator);
+		
 		minutesComboBox.setItems(Minutes);
+		
 		starttimebuttons.addComponent(minutesComboBox);
+		
+		minutesComboBox.addStyleName("minutescomboboxstyle");
 		starttimebuttons.addComponent(seperatorone);
-		starttimebuttons.addComponent(meridianComboBox);
+		
 
 
 		
 
 		meridianComboBox.setItems(Meridian);
+		starttimebuttons.addComponent(meridianComboBox);
 		//////////////////////////////
 
 		CssLayout endtimebutton = new CssLayout();
@@ -250,26 +271,26 @@ public class BookMeeting extends CssLayout implements View{
 
 		requiredRoom.setTextInputAllowed(false);
 
-
+		requiredRoom.setItems(RoomNumber);
 		Label lbl = new Label();
 
 
 		// Handle selection change
-		cb.addValueChangeListener(event ->{
-
-			Object kkk = event.getValue();
-
-			if(kkk.equals("Newton")) {
-
-				requiredRoom.setItems(newtonFloorlist);
-
-			}
-
-			else {
-
-				requiredRoom.setItems(RoomNumber);
-			}
-		});
+//		cb.addValueChangeListener(event ->{
+//
+//			Object kkk = event.getValue();
+//
+//			if(kkk.equals("Newton")) {
+//
+//				requiredRoom.setItems(newtonFloorlist);
+//
+//			}
+//
+//			else {
+//
+//				requiredRoom.setItems(RoomNumber);
+//			}
+//		});
 
 
 		//////////////////
@@ -331,7 +352,7 @@ public class BookMeeting extends CssLayout implements View{
 		login.addClickListener(new ClickListener() {
 
 
-			@Override
+		@Override
 			public void buttonClick(ClickEvent event) {
 
 				String bookeddatedb = birthdate.getValue().toString();
@@ -345,44 +366,83 @@ public class BookMeeting extends CssLayout implements View{
 						endtimeminutecombobox.getValue() + endtimeampmcombobox.getValue();
 
 
-				String  meetingvenudb = cb.getValue().toString();
+				//String  meetingvenudb = cb.getValue().toString();
 
 				String meetingpurposefieldvaluedb = meetingpurposefield.getValue();
 
 				String meetingRoomDb = requiredRoom.getValue().toString();
+				
+				String currentusername = CurrentUser.get().toString();
+				
+				System.out.println(currentusername +"currentusernamecurrentusername");
 
-				//String username = CurrentUser.get();
-
-
-				// TODO 
-
-			}
 			
-		}
-	
-	);
+///insert in to the db..
+				
+				
+				
+					
+					
+					String auth_user="viswa", auth_pwd = "viswa@123";
+					String encoded_pwd = "";
+					try {
+						encoded_pwd = URLEncoder.encode(auth_pwd, "UTF-8");
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					String client_url =
+							"mongodb://" + auth_user + ":" + encoded_pwd 
+							+ "@" + "ds163764.mlab.com" + ":" + 63764 + ""
+							+ "/" + "pickmeeting";
+					
+					if(!bookeddatedb.isEmpty() && !meetingstartimedb.isEmpty()
+							&&!meetingendtimedb.isEmpty()
+							&&!meetingpurposefieldvaluedb.isEmpty() 
+							&& !meetingRoomDb.isEmpty()
+						    ){
 
+				MongoClientURI uri = new MongoClientURI(client_url);
+				
+				MongoClient mongoClient = new MongoClient(uri);
+				
+				DB viswadbconnection = mongoClient.getDB("pickmeeting");
+				
+				DBCollection collection = viswadbconnection.getCollection("MeetingViewCollection");
+				
+				
+				System.out.println(collection.getDB()+"collection get initiated");
+				
+				
+				BasicDBObject document = new BasicDBObject();
+				
+				document.put("BookedDate", bookeddatedb);	
+				document.put("MeetingStartTime", meetingstartimedb);
+				document.put("MeetingEndTime", meetingendtimedb);
+				document.put("MeetingRoomNumber", meetingRoomDb);
+				document.put("MeetingPurpose", meetingpurposefieldvaluedb);
+				document.put("BookedUser", currentusername);
+			    
+			    collection.insert(document);  
+			    
+				}
+				
+				 
+				
+			}
 		
-		
+			    });
 		return loginLayout;
-
-
-
+		
+	}
+		
 	
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
+	private void showNotification(Notification notification) {
+		// keep the notification visible a little while after moving the
+		// mouse, or until clicked
+		notification.setDelayMsec(2000);
+		notification.show(Page.getCurrent());
 	}
 
 	}

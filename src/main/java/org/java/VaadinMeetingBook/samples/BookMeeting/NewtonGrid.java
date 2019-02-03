@@ -23,13 +23,13 @@ public class NewtonGrid extends Grid<MeetingFields> {
    
      
         
-  
+        addColumn(MeetingFields::getDate).setCaption("Booked Date");
         
         addColumn(MeetingFields::getStartTime).setCaption("Meeting Start Time");
         addColumn(MeetingFields::getEndTime).setCaption("Meeting End Time");
-        addColumn(MeetingFields::getMeetingPurpose).setCaption("Prupose");
+        addColumn(MeetingFields::getMeetingPurpose).setCaption("Meeting Purpose");
         addColumn(MeetingFields::getMeetingRoom).setCaption("MeetingRoom");
-        addColumn(MeetingFields::getuserName).setCaption("username");
+        addColumn(MeetingFields::getuserName).setCaption("Booked By the User");
         
 
        

@@ -10,8 +10,20 @@ import java.util.Set;
 
 
 
+
+
+
+
+
+
 import org.java.VaadinMeetingBook.MyUI;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
@@ -152,50 +164,48 @@ public class SignUpScreen extends CssLayout {
 					+ "@" + "ds163764.mlab.com" + ":" + 63764 + ""
 					+ "/" + "pickmeeting";
 
-//			MongoClientURI uri = new MongoClientURI(client_url);
-//			
-//			MongoClient mongoClient = new MongoClient(uri);
-//			
-//			DB viswadbconnection = mongoClient.getDB("pickmeeting");
-//			
-//			DBCollection collection = viswadbconnection.getCollection("UserNames");
-//			
-//			BasicDBObject whereQuery = new BasicDBObject();
-//			
-//		    whereQuery.put("userName", username);
-//		    
-//		    BasicDBObject fields = new BasicDBObject();
-//		    
-//		    whereQuery.put("password", password);
-//		    
-//		    DBCursor cursor = collection.find(whereQuery);
+		MongoClientURI uri = new MongoClientURI(client_url);
+		
+		MongoClient mongoClient = new MongoClient(uri);
+		
+		DB viswadbconnection = mongoClient.getDB("pickmeeting");
+		
+		DBCollection collection = viswadbconnection.getCollection("UserNames");			
+		BasicDBObject whereQuery = new BasicDBObject();
+			
+	    whereQuery.put("userName", username);
 		    
-//		   boolean sadfa = cursor.hasNext();
-//		   
-//		   
-//		   if(cursor.hasNext()) {
-//			   
-//		        System.out.println("");
-//		        
-//		        
-//		        showNotification(new Notification("Account existed Already",
-//						"",
-//						Notification.Type.ERROR_MESSAGE)); 
-//		        login.focus();
-//		    }
-//		   else{
-//			   BasicDBObject document = new BasicDBObject();
-//				document.put("userName",username);
-//				document.put("password",password);
-//				collection.insert(document);
-//
-//				showNotification(new Notification("Account Created Sucessfully",
-//						"",
-//						Notification.Type.HUMANIZED_MESSAGE));  
-//		   }
-//		    
-//		
-//			
+		   
+		    
+		    whereQuery.put("password", password);
+		    
+		    DBCursor cursor = collection.find(whereQuery);
+		    
+	   boolean sadfa = cursor.hasNext();
+		   
+		   
+	   if(cursor.hasNext()) {
+		   
+		        System.out.println("");		        
+	        
+		        showNotification(new Notification("Account existed Already",
+						"",
+						Notification.Type.ERROR_MESSAGE)); 
+		        login.focus();
+		    }
+		   else{
+			   BasicDBObject document = new BasicDBObject();
+				document.put("userName",username);
+				document.put("password",password);
+				collection.insert(document);
+
+			showNotification(new Notification("Account Created Sucessfully",
+						"",
+						Notification.Type.HUMANIZED_MESSAGE));  
+		   }
+	    
+		
+			
 
 		
 
